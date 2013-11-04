@@ -13,6 +13,7 @@
         />
 
     <EditText
+        android:id="@+id/musicTitleEditText"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:textSize="20dp"/>
@@ -26,11 +27,13 @@
         android:layout_width="fill_parent"
         android:orientation="horizontal">
         <RadioButton
+            android:id="@+id/musicLikeRadioBtn"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="20dp"
             android:text="like"/>
         <RadioButton
+            android:id="@+id/musicDontLikeRadioBtn"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="20dp"
@@ -50,13 +53,15 @@
             <TextView
                 android:text="artist"
                 android:textSize="20dp"/>
-            <EditText />
+            <EditText
+                android:id="@+id/musicArtistEditText"/>
         </TableRow>
         <TableRow>
             <TextView
                  android:text="category"
                 android:textSize="20dp"/>
-            <EditText />
+            <EditText
+                android:id="@+id/musicCategoryEditText"/>
         </TableRow>
         </TableLayout>
 
@@ -67,6 +72,7 @@
 
     <EditText
         android:textSize="20dp"
+        android:id="@+id/musicDescriptionEditText"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:hint="description"
