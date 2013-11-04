@@ -4,4 +4,101 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/edit_music_details"
+        android:textSize="34dp"
+        />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:textSize="20dp"/>
+
+
+    <!--Like it or not -->
+
+
+    <RadioGroup
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal">
+        <RadioButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="like"/>
+        <RadioButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="don't like"/>
+        </RadioGroup>
+
+
+    <!--Artist and category -->
+
+
+    <TableLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:stretchColumns="1">
+
+        <TableRow>
+            <TextView
+                android:text="artist"
+                android:textSize="20dp"/>
+            <EditText />
+        </TableRow>
+        <TableRow>
+            <TextView
+                 android:text="category"
+                android:textSize="20dp"/>
+            <EditText />
+        </TableRow>
+        </TableLayout>
+
+
+    <!--Description Field -->
+
+
+
+    <EditText
+        android:textSize="20dp"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:hint="description"
+        android:gravity="left"
+        android:lines="8"
+        android:layout_weight="2"/>
+
+
+
+
+    <!--Buttons-->
+
+
+    <LinearLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_weight="4">
+
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="OK"/>
+
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="Cancel"/>
+
+
+        </LinearLayout>
+
+
 </LinearLayout>

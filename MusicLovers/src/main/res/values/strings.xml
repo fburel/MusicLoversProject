@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Music Lovers</string>
+    <string name="edit_music_details">Edit music details</string>
 </resources>
