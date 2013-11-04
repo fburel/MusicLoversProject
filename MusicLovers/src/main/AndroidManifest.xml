@@ -12,7 +12,9 @@
 
         <activity
             android:name=".EditActivity"
-            android:label="musi details">
+            android:label="music details">
+        </activity>
+        <activity android:name=".MusicLoversActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
