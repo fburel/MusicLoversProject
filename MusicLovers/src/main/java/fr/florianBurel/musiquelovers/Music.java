@@ -60,4 +60,15 @@ public class Music {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Music{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", liked=" + liked +
+                '}';
+    }
 }
