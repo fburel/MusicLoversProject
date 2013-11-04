@@ -2,6 +2,9 @@ package fr.florianBurel.musiquelovers;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
@@ -19,6 +22,9 @@ public class EditActivity extends Activity
     private EditText musicCategoryEditText;
     private EditText musicDescriptionEditText;
 
+    private Button cancelBtn;
+    private Button okBtn;
+
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +38,31 @@ public class EditActivity extends Activity
         refresh();
 
 
+        this.okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update();
+            }
+        });
+
+        this.cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
+
+
+    }
+
+    private void update() {
+        this.music.setAuthor(this.musicArtistEditText.getText().toString());
+        this.music.setName(this.musicTitleEditText.getText().toString());
+        this.music.setDescription(this.musicDescriptionEditText.getText().toString());
+        this.music.setCategory(this.musicCategoryEditText.getText().toString());
+        this.music.setLiked(this.musicLikeRadioBtn.isChecked());
+
+        Log.i(this.getClass().toString(), this.music.getDescription());
     }
 
     private void refresh() {
@@ -51,6 +82,9 @@ public class EditActivity extends Activity
         this.musicDontLikeRadioBtn = (RadioButton) findViewById(R.id.musicDontLikeRadioBtn);
         this.musicLikeRadioBtn = (RadioButton) findViewById(R.id.musicLikeRadioBtn);
         this.musicTitleEditText = (EditText) findViewById(R.id.musicTitleEditText);
+
+        this.okBtn = (Button) findViewById(R.id.okBtn);
+        this.cancelBtn = (Button) findViewById(R.id.cancelBtn);
 
     }
 }

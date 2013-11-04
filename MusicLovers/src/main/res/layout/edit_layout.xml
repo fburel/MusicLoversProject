@@ -93,12 +93,14 @@
         android:layout_weight="4">
 
         <Button
+            android:id="@+id/okBtn"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
             android:text="OK"/>
 
         <Button
+            android:id="@+id/cancelBtn"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
