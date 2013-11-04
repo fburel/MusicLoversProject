@@ -1,6 +1,7 @@
 package fr.florianBurel.musiquelovers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,13 @@ public class MusicLoversActivity extends Activity {
 
     private class MusicAdapter extends BaseAdapter
     {
+        private  ArrayList<Music> list;
+        private Context context;
+
+        private MusicAdapter(ArrayList<Music> list, Context context) {
+            this.list = list;
+            this.context = context;
+        }
 
         @Override
         public int getCount() {
