@@ -1,5 +1,7 @@
 package fr.florianBurel.musiquelovers;
 
+import java.util.ArrayList;
+
 /**
  * Created by fl0 on 04/11/2013.
  */
@@ -70,5 +72,26 @@ public class Music {
                 ", description='" + description + '\'' +
                 ", liked=" + liked +
                 '}';
+    }
+
+    public static ArrayList<Music> getAllMusics()
+    {
+        ArrayList<Music> musics = new java.util.ArrayList<Music>();
+
+        for(int i = 0; i < 10; i++)
+        {
+            // Crée une nouvelle piste
+            Music music = new Music();
+            music.setName("track " + i);
+            music.setAuthor("unknown artist");
+            music.setCategory("");
+            music.setDescription("");
+            music.setLiked(false);
+
+            // Ajoute la piste a la liste
+            musics.add(music);
+        }
+
+        return musics;
     }
 }
