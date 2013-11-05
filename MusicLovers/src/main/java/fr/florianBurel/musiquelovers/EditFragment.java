@@ -1,9 +1,12 @@
 package fr.florianBurel.musiquelovers;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -11,7 +14,7 @@ import android.widget.RadioButton;
 /**
  * Created by fl0 on 04/11/2013.
  */
-public class EditActivity extends Activity
+public class EditFragment extends Fragment
 {
     Music music;
 
@@ -25,15 +28,15 @@ public class EditActivity extends Activity
     private Button cancelBtn;
     private Button okBtn;
 
-
-    public void onCreate(Bundle savedInstanceState)
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_layout);
+        View view = inflater.inflate(R.layout.edit_layout, container, true);
 
         this.music = new Music();
 
-        bind();
+        bind(view);
 
         refresh();
 
@@ -52,7 +55,7 @@ public class EditActivity extends Activity
             }
         });
 
-
+        return view;
     }
 
     private void update() {
@@ -74,17 +77,17 @@ public class EditActivity extends Activity
         this.musicDontLikeRadioBtn.setChecked(!this.music.isLiked());
     }
 
-    private void bind()
+    private void bind(View view)
     {
-        this.musicArtistEditText = (EditText) findViewById(R.id.musicArtistEditText);
-        this.musicCategoryEditText = (EditText) findViewById(R.id.musicCategoryEditText);
-        this.musicDescriptionEditText = (EditText) findViewById(R.id.musicDescriptionEditText);
-        this.musicDontLikeRadioBtn = (RadioButton) findViewById(R.id.musicDontLikeRadioBtn);
-        this.musicLikeRadioBtn = (RadioButton) findViewById(R.id.musicLikeRadioBtn);
-        this.musicTitleEditText = (EditText) findViewById(R.id.musicTitleEditText);
+        this.musicArtistEditText = (EditText) view.findViewById(R.id.musicArtistEditText);
+        this.musicCategoryEditText = (EditText) view.findViewById(R.id.musicCategoryEditText);
+        this.musicDescriptionEditText = (EditText) view.findViewById(R.id.musicDescriptionEditText);
+        this.musicDontLikeRadioBtn = (RadioButton) view.findViewById(R.id.musicDontLikeRadioBtn);
+        this.musicLikeRadioBtn = (RadioButton) view.findViewById(R.id.musicLikeRadioBtn);
+        this.musicTitleEditText = (EditText) view.findViewById(R.id.musicTitleEditText);
 
-        this.okBtn = (Button) findViewById(R.id.okBtn);
-        this.cancelBtn = (Button) findViewById(R.id.cancelBtn);
+        this.okBtn = (Button) view.findViewById(R.id.okBtn);
+        this.cancelBtn = (Button) view.findViewById(R.id.cancelBtn);
 
     }
 }
