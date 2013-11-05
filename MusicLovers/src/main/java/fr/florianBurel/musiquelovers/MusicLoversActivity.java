@@ -1,6 +1,7 @@
 package fr.florianBurel.musiquelovers;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -15,6 +16,11 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.androidquery.util.XmlDom;
+
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +29,9 @@ import java.util.List;
  */
 public class MusicLoversActivity extends Activity {
 
+    /*
+    compile 'com.android.support:support-v4:13.0.+'
+     */
     private static final int EDIT_ACTION = 1001;
     private static final int DELETE_ACTION = 1002;
     private ListView listView;
@@ -31,13 +40,13 @@ public class MusicLoversActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.main_layout);
 
         bind();
 
-        this.musics = Music.getAllMusics();
 
-        this.listView.setAdapter(new MusicAdapter(this.musics));
+        new MusicFetcher().execute();
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -138,6 +147,28 @@ public class MusicLoversActivity extends Activity {
             checkBox.setChecked(music.isLiked());
 
             return cell;
+        }
+    }
+
+
+
+    private class MusicFetcher extends AsyncTask<Void, Void, ArrayList<Music>>
+    {
+
+        @Override
+        protected ArrayList<Music> doInBackground(Void... voids) {
+            try {
+                return Music.getAllMusics();
+            } catch (Exception e) {
+                return new ArrayList<Music>();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Music> downloadedMusics) {
+            musics = downloadedMusics;
+            listView.setAdapter(new MusicAdapter(musics));
+            super.onPostExecute(musics);
         }
     }
 }
