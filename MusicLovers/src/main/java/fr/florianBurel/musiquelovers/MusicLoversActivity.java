@@ -30,7 +30,7 @@ public class MusicLoversActivity extends Activity {
 
         this.musics = Music.getAllMusics();
 
-        this.listView.setAdapter(new ArrayAdapter<Music>(this, android.R.layout.simple_list_item_1, this.musics));
+        this.listView.setAdapter(new MusicAdapter(this.musics));
 
     }
 
@@ -67,21 +67,21 @@ public class MusicLoversActivity extends Activity {
         public View getView(int i, View view, ViewGroup viewGroup) {
 
             // Recupération de la cellule
-            View cell = ...;
+            View cell = getLayoutInflater().inflate(R.layout.music_cell, null);
 
 //            // Recupération de la musique
-            Music music = ...;
+            Music music = this.list.get(i);
 
 //            // Recupération des composant de la cellule
 
-            TextView mainTextView = ...;
-            TextView detailTextView = ...;
-            CheckBox checkBox = ...;
+            TextView mainTextView = (TextView) cell.findViewById(R.id.mainTextView);
+            TextView detailTextView = (TextView) cell.findViewById(R.id.detailTextView);
+            CheckBox checkBox = (CheckBox) cell.findViewById(R.id.checkBox);
 
 //            //Affectation des valeur
-            mainTextView.setText(...);
-            detailTextView.setText(...);
-            checkBox.setChecked(...);
+            mainTextView.setText(music.getName());
+            detailTextView.setText(music.getAuthor());
+            checkBox.setChecked(music.isLiked());
 
             return cell;
         }
