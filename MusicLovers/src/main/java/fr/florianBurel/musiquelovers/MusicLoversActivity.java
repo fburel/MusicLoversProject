@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +50,12 @@ public class MusicLoversActivity extends Activity {
 
         @Override
         public int getCount() {
-            return 0;
+            return this.list.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return this.list.get(i);
         }
 
         @Override
@@ -63,7 +65,25 @@ public class MusicLoversActivity extends Activity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
+
+            // Recupération de la cellule
+            View cell = ...;
+
+//            // Recupération de la musique
+            Music music = ...;
+
+//            // Recupération des composant de la cellule
+
+            TextView mainTextView = ...;
+            TextView detailTextView = ...;
+            CheckBox checkBox = ...;
+
+//            //Affectation des valeur
+            mainTextView.setText(...);
+            detailTextView.setText(...);
+            checkBox.setChecked(...);
+
+            return cell;
         }
     }
 }
