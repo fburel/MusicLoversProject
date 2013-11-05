@@ -1,6 +1,9 @@
 package fr.florianBurel.musiquelovers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +49,7 @@ public class MusicLoversActivity extends Activity {
         bind();
 
 
-        new MusicFetcher().execute();
+        new MusicFetcher(this).execute();
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -155,6 +158,24 @@ public class MusicLoversActivity extends Activity {
     private class MusicFetcher extends AsyncTask<Void, Void, ArrayList<Music>>
     {
 
+        private ProgressDialog progressDialog;
+
+        public MusicFetcher(Context c)
+        {
+            this.progressDialog = new ProgressDialog(c);
+            this.progressDialog.setMessage("Please Wait");
+            this.progressDialog.setCancelable(false);
+            this.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            this.progressDialog.show();
+            super.onPreExecute();
+        }
+
+
         @Override
         protected ArrayList<Music> doInBackground(Void... voids) {
             try {
@@ -166,6 +187,7 @@ public class MusicLoversActivity extends Activity {
 
         @Override
         protected void onPostExecute(ArrayList<Music> downloadedMusics) {
+            this.progressDialog.dismiss();
             musics = downloadedMusics;
             listView.setAdapter(new MusicAdapter(musics));
             super.onPostExecute(musics);
