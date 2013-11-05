@@ -1,5 +1,14 @@
 package fr.florianBurel.musiquelovers;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -7,6 +16,8 @@ import java.util.ArrayList;
  * Created by fl0 on 04/11/2013.
  */
 public class Music {
+
+    private static final String ITUNES_WEBSERVICE_URL = "https://itunes.apple.com/fr/rss/topsongs/limit=50/explicit=true/xml";
 
     private String name;
     private String author;
@@ -82,12 +93,24 @@ public class Music {
                 '}';
     }
 
-    public static ArrayList<Music> getAllMusics()
-    {
+    public static ArrayList<Music> getAllMusics() throws IOException {
+
         InputStream inputStream = getDataFromURL(ITUNES_WEBSERVICE_URL);
 
         return musicsFromInputStream(inputStream);
-        
+
     }
+
+    private static InputStream getDataFromURL(String url) throws IOException {
+
+        HttpClient client = new DefaultHttpClient();
+        HttpUriRequest request = new HttpGet(url);
+
+        HttpResponse response = client.execute(request);
+
+        return null;
+    }
+
+
 
 }
