@@ -2,6 +2,10 @@ package fr.florianBurel.musiquelovers;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +23,8 @@ import java.util.List;
  */
 public class MusicLoversActivity extends Activity {
 
+    private static final int EDIT_ACTION = 1001;
+    private static final int DELETE_ACTION = 1002;
     private ListView listView;
 
     private ArrayList<Music> musics;
@@ -40,10 +46,46 @@ public class MusicLoversActivity extends Activity {
             }
         });
 
+        // ajoute un menu contextuelle sur le long click
+        registerForContextMenu(this.listView);
+
+        this.listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            public static final int VIEW_GROUP = 0;
+
+            @Override
+            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                contextMenu.add(0, EDIT_ACTION, VIEW_GROUP, "Edit");
+                contextMenu.add(0, DELETE_ACTION, VIEW_GROUP, "Delete");
+
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        // Recupération de la musique
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        Music music = this.musics.get(info.position);
+
+        switch (item.getItemId())
+        {
+            case EDIT_ACTION:
+                didSelectMusic(music);
+                break;
+            case DELETE_ACTION:
+                // TODO : Delete the music from the DB
+                this.musics.remove(music);
+                this.listView.setAdapter(new ArrayAdapter<Music>(this, android.R.layout.simple_list_item_1, this.musics));
+
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     private void didSelectMusic(Music music) {
-        
+        Log.e("toto", music.toString());
     }
 
     private void bind()
@@ -72,7 +114,7 @@ public class MusicLoversActivity extends Activity {
 
         @Override
         public long getItemId(int i) {
-            return 0;
+            return i;
         }
 
         @Override
