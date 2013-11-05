@@ -20,6 +20,13 @@ public class Music {
         this.liked = true;
     }
 
+    public Music(String name, String author, String category, String description) {
+        this.name = name;
+        this.author = author;
+        this.category = category;
+        this.description = description;
+    }
+
     public boolean isLiked() {
         return liked;
     }
