@@ -40,6 +40,12 @@ public class MusicLoversActivity extends Activity {
     private class MusicAdapter extends BaseAdapter
     {
 
+        private  ArrayList<Music> list;
+
+        private MusicAdapter(ArrayList<Music> list) {
+            this.list = list;
+        }
+
         @Override
         public int getCount() {
             return 0;
