@@ -1,5 +1,7 @@
 package fr.florianBurel.musiquelovers;
 
+import com.androidquery.util.XmlDom;
+
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -7,6 +9,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -93,12 +96,31 @@ public class Music {
                 '}';
     }
 
-    public static ArrayList<Music> getAllMusics() throws IOException {
+    public static ArrayList<Music> getAllMusics() throws IOException, SAXException {
 
         InputStream inputStream = getDataFromURL(ITUNES_WEBSERVICE_URL);
 
         return musicsFromInputStream(inputStream);
 
+    }
+
+    private static ArrayList<Music> musicsFromInputStream(InputStream inputStream) throws SAXException {
+
+        ArrayList<Music> arrayList = new ArrayList<Music>();
+
+        XmlDom xmlDom = new XmlDom(inputStream);
+
+        for(XmlDom entry : xmlDom.children("entry"))
+        {
+            String title = entry.text("im:name");
+            String artist = entry.text("im:artist");
+            String description = entry.text("rights");
+            String category = entry.tag("category").attr("term");
+
+            arrayList.add(new Music(title, artist, category, description));
+        }
+
+        return arrayList;
     }
 
     private static InputStream getDataFromURL(String url) throws IOException {
@@ -108,7 +130,7 @@ public class Music {
 
         HttpResponse response = client.execute(request);
 
-        return null;
+        return response.getEntity().getContent();
     }
 
 
