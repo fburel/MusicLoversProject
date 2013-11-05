@@ -1,5 +1,6 @@
 package fr.florianBurel.musiquelovers;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -83,22 +84,10 @@ public class Music {
 
     public static ArrayList<Music> getAllMusics()
     {
-        ArrayList<Music> musics = new java.util.ArrayList<Music>();
+        InputStream inputStream = getDataFromURL(ITUNES_WEBSERVICE_URL);
 
-        for(int i = 0; i < 10; i++)
-        {
-            // Crée une nouvelle piste
-            Music music = new Music();
-            music.setName("track " + i);
-            music.setAuthor("unknown artist");
-            music.setCategory("");
-            music.setDescription("");
-            music.setLiked(false);
-
-            // Ajoute la piste a la liste
-            musics.add(music);
-        }
-
-        return musics;
+        return musicsFromInputStream(inputStream);
+        
     }
+
 }
