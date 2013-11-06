@@ -16,6 +16,18 @@ import android.widget.RadioButton;
  */
 public class EditFragment extends Fragment
 {
+
+    public interface OnEditFinishedListener
+    {
+        public void onEditFinished(boolean finishedWithOKButtonClicked);
+    }
+
+    private OnEditFinishedListener onEditFinishedListener;
+
+    public void setOnEditFinishedListener(OnEditFinishedListener onEditFinishedListener) {
+        this.onEditFinishedListener = onEditFinishedListener;
+    }
+
     Music music;
 
     private EditText musicTitleEditText;
@@ -46,6 +58,8 @@ public class EditFragment extends Fragment
             @Override
             public void onClick(View view) {
                 update();
+                if(onEditFinishedListener != null)
+                    onEditFinishedListener.onEditFinished(true);
             }
         });
 
@@ -53,6 +67,8 @@ public class EditFragment extends Fragment
             @Override
             public void onClick(View view) {
                 setMusic(music);
+                if(onEditFinishedListener != null)
+                    onEditFinishedListener.onEditFinished(false);
             }
         });
 
