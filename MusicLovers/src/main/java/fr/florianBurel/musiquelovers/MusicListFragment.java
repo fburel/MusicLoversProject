@@ -56,12 +56,19 @@ public class MusicListFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
 
+
+
         View view = inflater.inflate(R.layout.music_list_fragment, container, false);
+
+
 
         this.listView = (ListView) view.findViewById(R.id.listView);
 
 
-        new MusicFetcher(this.getActivity()).execute();
+        if(this.musics == null)
+            new MusicFetcher(this.getActivity()).execute();
+        else
+            reloadData();
 
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,7 +95,8 @@ public class MusicListFragment extends Fragment
     }
 
 
-    public void reloadData() {
+    public void reloadData()
+    {
         listView.setAdapter(new MusicAdapter(musics, getActivity()));
     }
 

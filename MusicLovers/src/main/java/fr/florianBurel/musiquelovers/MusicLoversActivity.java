@@ -16,7 +16,8 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
 
 
 
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
 
@@ -56,6 +57,7 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
         if(this.editFragment !=null)
         {
             this.editFragment.setMusic(selected);
+            this.editFragment.setOnEditFinishedListener(this);
         }
         else
         {
