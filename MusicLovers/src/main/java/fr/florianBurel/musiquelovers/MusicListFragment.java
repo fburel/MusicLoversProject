@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class MusicListFragment extends Fragment
 {
 
+
     /*
     Utilistaion d'un interface pour remonter l'information Music Selectionnée
      */
@@ -84,6 +85,11 @@ public class MusicListFragment extends Fragment
         });
 
         return view;
+    }
+
+
+    public void reloadData() {
+        listView.setAdapter(new MusicAdapter(musics, getActivity()));
     }
 
     @Override

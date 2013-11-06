@@ -9,8 +9,7 @@ import android.widget.FrameLayout;
 /**
  * Created by fl0 on 04/11/2013.
  */
-public class MusicLoversActivity extends Activity implements MusicListFragment.OnMusicSelectedListener
-{
+public class MusicLoversActivity extends Activity implements MusicListFragment.OnMusicSelectedListener, EditFragment.OnEditFinishedListener {
 
     EditFragment editFragment;
     MusicListFragment musicListFragment;
@@ -63,10 +62,33 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
 
             this.editFragment.setMusic(selected);
 
+            this.editFragment.setOnEditFinishedListener(this);
+
             // Add the fragment
             getFragmentManager().beginTransaction()
                     .remove(this.musicListFragment)
                     .add(R.id.frameLayout, this.editFragment).commit();
+        }
+    }
+
+    @Override
+    public void onEditFinished(boolean finishedWithOKButtonClicked) {
+
+        // Si on est sur telephone
+        if(findViewById(R.id.frameLayout) != null)
+        {
+            // bascule vers la music list
+            getFragmentManager().beginTransaction()
+                    .remove(this.editFragment)
+                    .add(R.id.frameLayout, this.musicListFragment).commit();
+
+            // Destruction du edit Fragment
+            this.editFragment = null;
+        }
+
+        if(finishedWithOKButtonClicked)
+        {
+            this.musicListFragment.reloadData();
         }
     }
 }
