@@ -42,10 +42,7 @@ public class MusicListFragment extends Fragment
     }
 
 
-    `
-    /*
-        compile 'com.android.support:support-v4:13.0.+'
-         */
+
     private static final int EDIT_ACTION = 1001;
     private static final int DELETE_ACTION = 1002;
     private ListView listView;
@@ -112,7 +109,10 @@ public class MusicListFragment extends Fragment
     }
 
     private void didSelectMusic(Music music) {
-        Log.e("toto", music.toString());
+        if(this.onMusicSelectedListener != null)
+        {
+            this.onMusicSelectedListener.onMusicSelected(music);
+        }
     }
 
 

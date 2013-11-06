@@ -31,8 +31,10 @@ public class EditFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.edit_layout, container, true);
+
+        View view = inflater.inflate(R.layout.edit_layout, container, false);
 
         this.music = new Music();
 

@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 /**
  * Created by fl0 on 04/11/2013.
  */
-public class MusicLoversActivity extends Activity
+public class MusicLoversActivity extends Activity implements MusicListFragment.OnMusicSelectedListener
 {
 
     EditFragment editFragment;
@@ -39,6 +39,34 @@ public class MusicLoversActivity extends Activity
             // Add the fragment
             getFragmentManager().beginTransaction()
                     .add(R.id.frameLayout, this.musicListFragment).commit();
+        }
+        else
+        {
+            // Gestion du cas tablette
+        }
+
+        this.musicListFragment.setOnMusicSelectedListener(this);
+    }
+
+    @Override
+    public void onMusicSelected(Music selected) {
+
+        // Si on est sur tablette
+        if(this.editFragment !=null)
+        {
+
+        }
+        else
+        {
+            // Crée un nouveau musicListFragment
+            this.editFragment = new EditFragment();
+
+
+
+            // Add the fragment
+            getFragmentManager().beginTransaction()
+                    .remove(this.musicListFragment)
+                    .add(R.id.frameLayout, this.editFragment).commit();
         }
     }
 }
