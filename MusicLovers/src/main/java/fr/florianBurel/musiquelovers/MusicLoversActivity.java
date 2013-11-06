@@ -61,7 +61,7 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
             // Crée un nouveau musicListFragment
             this.editFragment = new EditFragment();
 
-
+            this.editFragment.setMusic(selected);
 
             // Add the fragment
             getFragmentManager().beginTransaction()

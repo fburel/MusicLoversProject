@@ -36,11 +36,10 @@ public class EditFragment extends Fragment
 
         View view = inflater.inflate(R.layout.edit_layout, container, false);
 
-        this.music = new Music();
 
         bind(view);
 
-        refresh();
+        setMusic(music);
 
 
         this.okBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +52,7 @@ public class EditFragment extends Fragment
         this.cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refresh();
+                setMusic(music);
             }
         });
 
@@ -70,7 +69,13 @@ public class EditFragment extends Fragment
         Log.i(this.getClass().toString(), this.music.getDescription());
     }
 
-    private void refresh() {
+    public void setMusic(Music music) {
+
+        this.music = music;
+
+        if(music == null) return;
+        if(this.musicArtistEditText == null) return;
+
         this.musicTitleEditText.setText(this.music.getName());
         this.musicArtistEditText.setText(this.music.getAuthor());
         this.musicCategoryEditText.setText(this.music.getCategory());
