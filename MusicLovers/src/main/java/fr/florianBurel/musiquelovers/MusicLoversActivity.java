@@ -42,6 +42,8 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
         else
         {
             // Gestion du cas tablette
+            this.musicListFragment = (MusicListFragment) getFragmentManager().findFragmentById(R.id.listFragment);
+            this.editFragment = (EditFragment) getFragmentManager().findFragmentById(R.id.editFragment);
         }
 
         this.musicListFragment.setOnMusicSelectedListener(this);
@@ -53,7 +55,7 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
         // Si on est sur tablette
         if(this.editFragment !=null)
         {
-
+            this.editFragment.setMusic(selected);
         }
         else
         {
@@ -69,6 +71,8 @@ public class MusicLoversActivity extends Activity implements MusicListFragment.O
                     .remove(this.musicListFragment)
                     .add(R.id.frameLayout, this.editFragment).commit();
         }
+
+
     }
 
     @Override
