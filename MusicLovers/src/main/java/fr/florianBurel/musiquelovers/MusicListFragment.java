@@ -27,11 +27,29 @@ public class MusicListFragment extends Fragment
 {
 
     /*
-    compile 'com.android.support:support-v4:13.0.+'
+    Utilistaion d'un interface pour remonter l'information Music Selectionnée
      */
+
+    public interface OnMusicSelectedListener
+    {
+        public void onMusicSelected(Music selected);
+    }
+
+    private OnMusicSelectedListener onMusicSelectedListener;
+
+    public void setOnMusicSelectedListener(OnMusicSelectedListener onMusicSelectedListener) {
+        this.onMusicSelectedListener = onMusicSelectedListener;
+    }
+
+
+    `
+    /*
+        compile 'com.android.support:support-v4:13.0.+'
+         */
     private static final int EDIT_ACTION = 1001;
     private static final int DELETE_ACTION = 1002;
     private ListView listView;
+
 
     private ArrayList<Music> musics;
 
